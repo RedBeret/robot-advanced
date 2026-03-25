@@ -1,0 +1,11 @@
+"""Production environment variables — READ-ONLY smoke tests only."""
+
+API_BASE_URL = "https://api.example.com"
+API_TIMEOUT = 10
+DB_HOST = "prod-db.internal"
+DB_PORT = 5432
+DB_NAME = "proddb"
+ENABLE_BROWSER_TESTS = False
+ENABLE_PERFORMANCE_TESTS = False
+LOG_LEVEL = "WARN"
+ENV_NAME = "prod"

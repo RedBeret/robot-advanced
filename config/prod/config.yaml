@@ -1,0 +1,12 @@
+api:
+  base_url: https://api.example.com
+  timeout: 10
+
+database:
+  host: prod-db.internal
+  port: 5432
+  name: proddb
+
+features:
+  browser_tests: false
+  performance_tests: false

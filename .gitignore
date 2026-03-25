@@ -1,0 +1,16 @@
+results/
+output/
+*.pyc
+__pycache__/
+venv/
+.venv/
+*.egg-info/
+.browser/
+node_modules/
+log.html
+report.html
+output.xml
+screenshot*.png
+.DS_Store
+*.db
+metrics_report.html

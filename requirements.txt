@@ -1,0 +1,8 @@
+robotframework>=7.0
+robotframework-browser>=18.0
+robotframework-requests>=0.9
+robotframework-databaselibrary>=2.0
+robotframework-pabot>=2.16
+robotframework-robocop>=5.0
+pyyaml>=6.0
+requests>=2.31

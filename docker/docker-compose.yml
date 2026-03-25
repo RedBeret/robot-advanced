@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  tests:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../results:/results
+    environment:
+      - RF_ENV=dev
+    depends_on:
+      - mock-api
+
+  mock-api:
+    image: mockoon/cli:latest
+    command: ["--data", "/data/mock.json", "--port", "3000"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./mock-data:/data

@@ -1,0 +1,12 @@
+api:
+  base_url: https://jsonplaceholder.typicode.com
+  timeout: 30
+
+database:
+  host: localhost
+  port: 5432
+  name: testdb_dev
+
+features:
+  browser_tests: true
+  performance_tests: true

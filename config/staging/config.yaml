@@ -1,0 +1,12 @@
+api:
+  base_url: https://staging-api.example.com
+  timeout: 15
+
+database:
+  host: staging-db.internal
+  port: 5432
+  name: testdb_staging
+
+features:
+  browser_tests: true
+  performance_tests: false

@@ -1,0 +1,11 @@
+"""Staging environment variables."""
+
+API_BASE_URL = "https://staging-api.example.com"
+API_TIMEOUT = 15
+DB_HOST = "staging-db.internal"
+DB_PORT = 5432
+DB_NAME = "testdb_staging"
+ENABLE_BROWSER_TESTS = True
+ENABLE_PERFORMANCE_TESTS = False
+LOG_LEVEL = "INFO"
+ENV_NAME = "staging"

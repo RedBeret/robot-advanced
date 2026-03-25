@@ -120,6 +120,10 @@ The included GitHub Actions workflow runs:
 3. Artifact upload for reports
 4. Multi-Python version matrix
 
+## Next Steps
+
+Ready for infrastructure testing? Continue with [robot-infra](https://github.com/RedBeret/robot-infra) — SSH, WinRM, network validation, firewall auditing, and full deployment pipelines across Linux and Windows targets.
+
 ## License
 
 MIT

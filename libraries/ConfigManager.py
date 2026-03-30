@@ -1,8 +1,4 @@
-"""Environment configuration manager for Robot Framework.
-
-Loads variables from environment-specific config files,
-supporting dev/staging/prod profiles.
-"""
+"""Environment configuration manager for Robot Framework."""
 
 import os
 import yaml
@@ -33,7 +29,6 @@ class ConfigManager:
 
     @keyword("Get Config Value")
     def get_config_value(self, key: str, default: str = None) -> str:
-        """Get a configuration value by dot-notation key."""
         parts = key.split(".")
         value = self._config
         for part in parts:
@@ -49,7 +44,6 @@ class ConfigManager:
 
     @keyword("Switch Environment")
     def switch_environment(self, env: str):
-        """Switch to a different environment config."""
         self._env = env
         self._config = {}
         self._load_config()

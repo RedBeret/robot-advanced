@@ -48,7 +48,6 @@ Concurrent-Style Sequential Load Test
         ${resp}=    GET    /posts/${i + 1}
         Append To List    ${results}    ${resp}[status]
     END
-    # All should be 200
     FOR    ${status}    IN    @{results}
         Should Be Equal As Integers    ${status}    200
     END

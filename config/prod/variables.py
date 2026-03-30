@@ -1,5 +1,4 @@
-"""Production environment variables — READ-ONLY smoke tests only."""
-
+"""Production environment variables."""
 API_BASE_URL = "https://api.example.com"
 API_TIMEOUT = 10
 DB_HOST = "prod-db.internal"

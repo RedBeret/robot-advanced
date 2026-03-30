@@ -42,7 +42,6 @@ Response Chaining Between Requests
     Save Response Value    user_email    email
     ${email}=    Get Saved Value    user_email
     Should Not Be Empty    ${email}
-    # Use the saved value conceptually in the next request
     GET    /users/1
     Response Value Should Be    email    ${email}
 

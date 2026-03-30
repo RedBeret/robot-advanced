@@ -15,7 +15,7 @@ Verify Python Environment In Container
 Verify Robot Framework Is Installed
     [Documentation]    Check RF is available
     ${result}=    Run Process    robot    --version
-    Should Be Equal As Integers    ${result.rc}    0
+    Should Contain    ${result.stdout}    Robot Framework
 
 Verify Working Directory
     [Documentation]    Confirm we're in the expected directory

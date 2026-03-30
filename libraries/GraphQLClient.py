@@ -1,8 +1,4 @@
-"""GraphQL client library for Robot Framework.
-
-Provides keywords for executing GraphQL queries and mutations
-against any GraphQL endpoint.
-"""
+"""GraphQL client library for Robot Framework."""
 
 import json
 from urllib.request import Request, urlopen
@@ -26,42 +22,31 @@ class GraphQLClient:
 
     @keyword("Execute GraphQL Query")
     def execute_query(self, query: str, variables: dict = None) -> dict:
-        """Execute a GraphQL query and return the data."""
         payload = {"query": query}
         if variables:
             payload["variables"] = variables
-
         data = json.dumps(payload).encode()
         req = Request(self._endpoint, data=data, headers=self._headers)
-
         with urlopen(req, timeout=30) as resp:
             result = json.loads(resp.read())
-
         self._last_result = result
         if "errors" in result:
             errors = json.dumps(result["errors"], indent=2)
             logger.warn(f"GraphQL errors: {errors}")
-
         return result.get("data", {})
 
     @keyword("Execute GraphQL Mutation")
     def execute_mutation(self, mutation: str, variables: dict = None) -> dict:
-        """Execute a GraphQL mutation."""
         return self.execute_query(mutation, variables)
 
     @keyword("GraphQL Response Should Not Have Errors")
     def response_should_not_have_errors(self):
-        """Assert the last GraphQL response has no errors."""
         if self._last_result and "errors" in self._last_result:
             raise AssertionError(
                 f"GraphQL returned errors: {json.dumps(self._last_result['errors'], indent=2)}")
 
     @keyword("Get GraphQL Field")
     def get_field(self, *path) -> object:
-        """Navigate into the last GraphQL response data.
-
-        Example: Get GraphQL Field    countries    0    name
-        """
         data = self._last_result.get("data", {})
         for key in path:
             if isinstance(data, dict):

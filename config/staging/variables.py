@@ -1,5 +1,4 @@
 """Staging environment variables."""
-
 API_BASE_URL = "https://staging-api.example.com"
 API_TIMEOUT = 15
 DB_HOST = "staging-db.internal"

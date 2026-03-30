@@ -9,6 +9,7 @@ Default Tags     advanced    real-world
 
 *** Variables ***
 ${TEMP_DATA_DIR}    ${TEMPDIR}${/}rf_real_world
+${IDEMPOTENT_FILE}    ${TEMPDIR}${/}rf_real_world${/}idempotent.txt
 
 *** Test Cases ***
 Retry Keyword With Backoff
@@ -20,49 +21,41 @@ Retry Keyword With Backoff
 Circuit Breaker Protects Against Cascading Failures
     [Documentation]    Circuit breaker opens after repeated failures
     Initialize Circuit Breaker    test-service    failure_threshold=2    reset_timeout=5
-    # First two failures trip the breaker
     Run Keyword And Expect Error    *    Execute With Circuit Breaker
     ...    test-service    Always Failing Keyword
     Run Keyword And Expect Error    *    Execute With Circuit Breaker
     ...    test-service    Always Failing Keyword
-    # Circuit should now be open
     ${state}=    Get Circuit Breaker State    test-service
     Should Be Equal    ${state}    open
-    # Next call should be rejected immediately
     Run Keyword And Expect Error    *OPEN*    Execute With Circuit Breaker
     ...    test-service    Log    This should not execute
 
 Test Data Setup And Cleanup Pattern
     [Documentation]    Create test data, use it, clean up regardless of outcome
     [Setup]    Create Test Data Directory
-    # Create test files
     Create File    ${TEMP_DATA_DIR}${/}user1.json    {"name": "Test User 1"}
     Create File    ${TEMP_DATA_DIR}${/}user2.json    {"name": "Test User 2"}
-    # Verify data
     ${files}=    List Files In Directory    ${TEMP_DATA_DIR}    *.json
     Length Should Be    ${files}    2
     [Teardown]    Cleanup Test Data Directory
 
 API With Retry On Transient Failure
     [Documentation]    Real API call with retry wrapper
+    [Tags]    advanced    real-world    network
     ${resp}=    Retry Keyword    GET    /posts/1
     ...    retries=2    delay=1.0    backoff=2.0
     Response Should Contain Key    title
 
 Idempotent Test Pattern
     [Documentation]    Test that can run multiple times safely
-    # Setup: ensure clean state
-    ${path}=    Set Variable    ${TEMP_DATA_DIR}${/}idempotent.txt
     [Setup]    Run Keywords    Create Test Data Directory
-    ...    AND    Remove File    ${path}
-    # Action: create the resource
-    Create File    ${path}    version1
-    File Should Exist    ${path}
-    ${content}=    Get File    ${path}
+    ...    AND    Remove File    ${IDEMPOTENT_FILE}
+    Create File    ${IDEMPOTENT_FILE}    version1
+    File Should Exist    ${IDEMPOTENT_FILE}
+    ${content}=    Get File    ${IDEMPOTENT_FILE}
     Should Be Equal    ${content}    version1
-    # Running again should produce same result
-    Create File    ${path}    version1
-    ${content}=    Get File    ${path}
+    Create File    ${IDEMPOTENT_FILE}    version1
+    ${content}=    Get File    ${IDEMPOTENT_FILE}
     Should Be Equal    ${content}    version1
     [Teardown]    Cleanup Test Data Directory
 

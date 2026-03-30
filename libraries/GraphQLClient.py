@@ -32,7 +32,7 @@ class GraphQLClient:
         self._last_result = result
         if "errors" in result:
             errors = json.dumps(result["errors"], indent=2)
-            logger.warn(f"GraphQL errors: {errors}")
+            logger.warning(f"GraphQL errors: {errors}")
         return result.get("data", {})
 
     @keyword("Execute GraphQL Mutation")

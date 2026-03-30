@@ -25,7 +25,7 @@ class ConfigManager:
                 self._config = yaml.safe_load(f) or {}
             logger.info(f"Loaded config for environment: {self._env}")
         else:
-            logger.warn(f"No config.yaml found for environment: {self._env}")
+            logger.warning(f"No config.yaml found for environment: {self._env}")
 
     @keyword("Get Config Value")
     def get_config_value(self, key: str, default: str = None) -> str:

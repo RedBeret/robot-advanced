@@ -28,7 +28,7 @@ class RetryLibrary:
             except Exception as e:
                 last_error = e
                 if attempt < int(retries):
-                    logger.warn(f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s...")
+                    logger.warning(f"Attempt {attempt + 1} failed: {e}. Retrying in {current_delay}s...")
                     time.sleep(current_delay)
                     current_delay *= float(backoff)
         raise AssertionError(f"Keyword '{keyword_name}' failed after {int(retries) + 1} attempts. Last error: {last_error}")
@@ -81,7 +81,7 @@ class RetryLibrary:
             cb["last_failure"] = time.time()
             if cb["failures"] >= cb["threshold"]:
                 cb["state"] = "open"
-                logger.warn(f"Circuit '{name}' is now OPEN after {cb['failures']} failures")
+                logger.warning(f"Circuit '{name}' is now OPEN after {cb['failures']} failures")
             raise
 
     @keyword("Get Circuit Breaker State")

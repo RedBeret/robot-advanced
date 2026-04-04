@@ -1,5 +1,8 @@
 # Robot Framework Advanced
 
+![Robot Framework](https://img.shields.io/badge/Robot_Framework-green?logo=robotframework&logoColor=white) ![License: MIT](https://img.shields.io/badge/License-MIT-green) ![GitHub stars](https://img.shields.io/github/stars/RedBeret/robot-advanced?style=social)
+
+
 Production-grade Robot Framework techniques: custom test frameworks, API testing, Docker, CI/CD, BDD, performance testing, and multi-environment configs.
 
 **Prerequisites:** Complete [robot-basics](https://github.com/RedBeret/robot-basics) and [robot-intermediate](https://github.com/RedBeret/robot-intermediate) first.
